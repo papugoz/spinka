@@ -1,9 +1,14 @@
 Spinka::Application.routes.draw do
 
-  root 'static_pages#home'
-  get  '/onas' => 'static_pages#onas'
-  get  '/pomoc' => 'static_pages#pomoc'
-  get  '/kontakt' => 'static_pages#kontakt'
+  root      'static_pages#home'
+  resources :users, path: '/uzytkownicy'
+  get       '/rejestracja'  => 'users#new'
+  get       '/profil'       => 'users#show'
+  get       '/onas'         => 'static_pages#onas'
+  get       '/pomoc'        => 'static_pages#pomoc'
+  get       '/kontakt'      => 'static_pages#kontakt'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

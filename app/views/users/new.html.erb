@@ -1,0 +1,40 @@
+<h3>Rejestracja</h3>
+
+<div class="col-md-6">
+	<%= render 'shared/error_messages', object: @user %>
+	<%= form_for @user, html: { class: "form-horizontal" } do |f| %>
+
+	<div class="form-group">
+		<%= f.label :username, "login", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.text_field :username, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :email, "email", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.text_field :email, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password, "hasło", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.password_field :password, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password_confirmation, "potwierdź hasło", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.password_field :password_confirmation, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="col-md-offset-4">
+		<%= f.submit "stwórz", class: "btn btn-large btn-primary" %>
+	</div>
+	<% end %>
+</div>
+
