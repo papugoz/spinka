@@ -9,8 +9,9 @@ Bundler.require(:default, Rails.env)
 module Spinka
   class Application < Rails::Application
 
-    I18n.enforce_available_locales = true
-    config.assets.paths << "#{Rails}/vendor/assets/fonts"
+   I18n.enforce_available_locales = true
+
+   config.assets.paths << "#{Rails}/vendor/assets/fonts"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -20,8 +21,8 @@ module Spinka
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = :pl
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-  end
+end
 end

@@ -27,5 +27,5 @@ Spinka::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.i18n.available_locales = :pl
+  config.i18n.available_locales = [ :pl, :en ]
 end

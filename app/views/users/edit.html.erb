@@ -1,0 +1,48 @@
+<h3>Edycja profilu</h3>
+
+<div class='col-md-6'>
+	<h4><%= @user.username %></h4>
+	<%= render 'shared/error_messages', object: @user %>
+	<%= form_for @user, html: { class: "form-horizontal" } do |f| %>
+
+	<div class="form-group">
+		<%= f.label :first_name, "imie", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.text_field :first_name, class: "form-control", placeholder: @user.first_name %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :last_name, "nazwisko", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.text_field :last_name, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :email, "email", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.text_field :email, class: "form-control", text: @user.email %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password, "hasło", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.password_field :password, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password_confirmation, "potwierdź hasło", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= f.password_field :password_confirmation, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class="col-md-offset-4">
+		<%= f.submit "aktualizuj", class: "btn btn-large btn-primary" %>
+	</div>
+
+	<% end %>
+</div>

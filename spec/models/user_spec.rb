@@ -42,6 +42,26 @@ describe User do
 			end
 		end
 
+		describe "zle haslo" do
+
+			describe "puste" do
+
+				before { @user = User.new(username: "Foobar", email: "foo@bar.com", password: " ", password_confirmation: " ") }
+
+				it { should_not be_valid }
+
+			end
+
+			describe "niepotwierdzone" do
+
+				before { @user.password_confirmation = "foobaz" }
+
+				it { should_not be_valid }
+
+			end
+
+		end
+
 	end
 
 end
