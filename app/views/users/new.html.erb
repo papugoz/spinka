@@ -1,7 +1,11 @@
+<div class="row">
+	<div class="col-md-12">
+		<%= render 'shared/error_messages', object: @user %>
+	</div>
+</div>
 <h3>Rejestracja</h3>
 
 <div class="col-md-6">
-	<%= render 'shared/error_messages', object: @user %>
 	<%= form_for @user, html: { class: "form-horizontal" } do |f| %>
 
 	<div class="form-group">
@@ -34,6 +38,7 @@
 
 	<div class="col-md-offset-4">
 		<%= f.submit "stwórz", class: "btn btn-large btn-primary" %>
+		<h5>Posiadasz już konto? Zaloguj się <%= link_to "tutaj", logowanie_path %></h5>
 	</div>
 	<% end %>
 </div>

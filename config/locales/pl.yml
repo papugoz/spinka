@@ -1,4 +1,8 @@
 pl:
+  will_paginate:
+    page_gap: "&hellip;"
+    previous_label: "< poprzednia"
+    next_label: "następna >"
   date:
     abbr_day_names:
     - nie
