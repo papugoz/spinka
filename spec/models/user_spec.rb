@@ -13,17 +13,22 @@ describe User do
 	it { should respond_to(:password_digest) }
 	it { should respond_to(:password) }
 	it { should respond_to(:password_confirmation) }
+	it { should respond_to(:admin) }
 
 	it { should be_valid }
 
 	describe "niepoprawny uzytkownik" do
-
 		describe "zly login" do
+			describe "pusty login" do
+				before { @user.username = " " }
 
-			before { @user.username = " " }
+				it { should_not be_valid}
+			end
+			describe "login zajety" do
+				before { FactoryGirl.create(:user, username: "Foobar") }
 
-			it { should_not be_valid}
-
+				it { should_not be_valid }
+			end
 		end
 
 		describe "zly email" do
@@ -39,6 +44,12 @@ describe User do
 					@user.email = invalid_address
 					expect(@user).not_to be_valid
 				end
+			end
+
+			describe "zajety" do
+				before { FactoryGirl.create(:user, email: "foo@bar.com") }
+
+				it { should_not be_valid }
 			end
 		end
 

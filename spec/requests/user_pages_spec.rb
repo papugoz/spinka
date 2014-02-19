@@ -19,7 +19,7 @@ describe "user pages" do
 				click_button "stwórz"
 			end
 
-			it { should have_text("Tutaj") }
+			it { should have_selector('div', text: "Pomyslnie zarejestrowany") }
 
 		end
 	end
