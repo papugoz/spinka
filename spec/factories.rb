@@ -9,4 +9,10 @@ FactoryGirl.define do
 			admin true
 		end
 	end
+
+	factory :news do
+		sequence(:title) { |n| "News##{n}" }
+		user
+		content "Lorem Ipsum"
+	end
 end

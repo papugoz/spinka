@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 	before_save { email.downcase! }
 	before_create :create_remember_token
 
+	has_many :news
+
 	has_secure_password
 	validates :password, length: { minimum: 6}, on: :create
 

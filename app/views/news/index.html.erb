@@ -1,0 +1,32 @@
+<% provide(:title, "Nwesy") %>
+
+<h3>Newsy:</h3> 
+<%= link_to "<span class='glyphicon glyphicon-plus'></span> dodaj nowy".html_safe, new_news_path, class: "btn btn-default btn-sm" %>
+<br>
+<br>
+<div class="center-block">
+	<%= will_paginate @news, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+</div>
+
+<% @news.each do |news| %>
+
+<div class="panel panel-default">
+	<div class="panel-heading panel-title">
+		<%= link_to news.title, news_path(news) %>
+		<small class="pull-right text-muted"><%= l(news.created_at, format: :long) %></small>
+	</div>
+	<div class="panel-body">
+		<%= news.content.split(" ")[0..50].join(" ") + "..." %>
+	</div>
+	<% if current_user && current_user.admin? %>
+	<div class="panel-footer">
+		<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(news), class: "btn btn-default btn-sm" %>
+		<%= link_to "<span class='glyphicon glyphicon-trash'></span> usuń".html_safe, news, method: :delete, data: { confirm: "Na pewno?" }, class: "btn btn-default btn-sm" %>
+	</div>
+	<% end %>
+</div>
+<% end %>
+
+<div class="center-block">
+	<%= will_paginate @users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+</div>

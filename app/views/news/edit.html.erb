@@ -1,0 +1,18 @@
+<%= provide(:title, "#{@news.title} - edycja") %>
+
+<h3><%= @news.title %></h3>
+
+<%= form_for @news, html: { class: "form" } do |f| %>
+
+<div class="form-group">	
+	<%= f.label :title, "Tytuł" %>
+	<%= f.text_field :title, class: "form-control" %>
+</div>
+
+<%= f.text_area :content, class: "form-control", rows: 15 %>
+
+<br>
+
+<%= f.submit "Aktualizuj", class: "btn btn-default" %>
+
+<% end %>

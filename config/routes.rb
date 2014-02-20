@@ -1,11 +1,16 @@
 Spinka::Application.routes.draw do
 
   root      'static_pages#home'
+
   resources :users, path: '/uzytkownicy', path_names: { edit: 'edycja' }
+  get       '/rejestracja'            => 'users#new'
+
   resources :sessions, only: [:new, :create, :destroy]
   get       '/logowanie'              => 'sessions#new'
   delete    '/wyloguj'                => 'sessions#destroy'
-  get       '/rejestracja'            => 'users#new'
+
+  resources :news, path: '/newsy', path_names: { new: 'nowy', edit: 'edycja' }
+
   get       '/onas'                   => 'static_pages#onas'
   get       '/pomoc'                  => 'static_pages#pomoc'
   get       '/kontakt'                => 'static_pages#kontakt'

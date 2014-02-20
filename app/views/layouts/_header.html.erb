@@ -1,4 +1,4 @@
-<header class="container">
+<header class="container" id="top">
 	<div class="page-header">
 		<div class="row">
 			<div class="row">
@@ -35,7 +35,7 @@
 						<ul class="dropdown-menu">
 							<li><%= link_to 'Profil', user_path(current_user) %></li>
 							<% if current_user.admin? %>
-							<li><%= link_to 'Użytkownicy', users_path %></li>
+							<%= render 'layouts/admin_menu' %>
 							<% end %>
 							<li class="divider"></li>
 							<li><%= link_to 'Wyloguj', wyloguj_path, method: "delete"%></li>

@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
 	def home
-
+		@news = News.first(5)
 	end
 
 	def onas

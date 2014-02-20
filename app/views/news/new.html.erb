@@ -1,0 +1,16 @@
+<% provide(:title, "Nowy news") %>
+
+<%= form_for @news, html: { class: "form" } do |f| %>
+
+<div class="form-group">	
+	<%= f.label :title, "Tytuł" %>
+	<%= f.text_field :title, class: "form-control" %>
+</div>
+
+<%= f.text_area :content, class: "form-control", rows: 15 %>
+
+<br>
+
+<%= f.submit "Dodaj", class: "btn btn-primary" %>
+
+<% end %>
