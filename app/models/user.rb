@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 	before_create :create_remember_token
 
 	has_many :news
+	has_many :comments, through: :news
 
 	has_secure_password
 	validates :password, length: { minimum: 6}, on: :create

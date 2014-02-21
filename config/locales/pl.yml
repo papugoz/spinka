@@ -230,6 +230,9 @@ pl:
         password: "Hasło"
         password_confirmation: "Potwierdzenie hasła"
         username: "Login"
+      news:
+        title: "Tytuł"
+        content: "Treść"
     errors:
       models:
         user:
@@ -245,3 +248,9 @@ pl:
               taken: "jest już zajęty"
             password_confirmation:
               confirmation: "nie zgadza się z hasłem"
+        news:
+          attributes:
+            title:
+              blank: "nie może być pusty"
+            content:
+              blank: "nie może być pusta"

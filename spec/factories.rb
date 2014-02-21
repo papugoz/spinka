@@ -15,4 +15,10 @@ FactoryGirl.define do
 		user
 		content "Lorem Ipsum"
 	end
+
+	factory :comment do
+		content "Lorem Ipsum"
+		user
+		news
+	end
 end

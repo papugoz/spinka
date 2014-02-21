@@ -1,4 +1,7 @@
 class NewsController < ApplicationController
+before_action :signed_in_user, only: [:index, :new, :create, :edit, :update]
+before_action :admin_user, only: [:index, :new, :create, :edit, :update]
+
   def new
     @news = News.new
   end

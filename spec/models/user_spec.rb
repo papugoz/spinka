@@ -56,7 +56,7 @@ describe User do
 
 		describe "zle haslo" do
 			describe "puste" do
-				before { @user = User.new(username: "Foobar", email: "foo@bar.com", password: " ", password_confirmation: " ") }
+				before { @user = User.new(username: "Foobar", email: "foo@bar.com", password: " ", admin: true, password_confirmation: " ") }
 
 				it { should_not be_valid }
 			end
@@ -66,17 +66,6 @@ describe User do
 
 				it { should_not be_valid }
 			end
-		end
-	end
-
-	describe "uzytkownik pisze posta" do
-		before { @user.save }
-
-		let!(:nowyNews1) { FactoryGirl.create(:news, user_id: @user.id) }
-		let!(:nowyNews2) { FactoryGirl.create(:news, user_id: @user.id) }
-
-		it "powinien miec newsy" do
-			expect(@user.news.to_a).to eq [nowyNews1, nowyNews2]
 		end
 	end
 end

@@ -1,5 +1,6 @@
 <%= provide(:title, @news.title) %>
 
+<section class="col-md-9">
 <h3 id="top"><%= @news.title %></h3>
 <div class="row text-muted">
 	<div class="col-md-2 small">
@@ -19,3 +20,6 @@
 <%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(@news), class: "btn btn-default btn-sm" %>
 <%= link_to "<span class='glyphicon glyphicon-trash'></span> usuń".html_safe, @news, method: :delete, data: { confirm: "Na pewno?" }, class: "btn btn-default btn-sm" %>
 <% end %>
+</section>
+
+<%= render 'static_pages/sidebar' %>

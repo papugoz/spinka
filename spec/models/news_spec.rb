@@ -19,4 +19,14 @@ describe News do
 		its(:user) { should eq user }
 		its(:user_id) { should eq user.id }
 	end
+
+	describe "uzytkownik pisze posta" do
+
+		let!(:nowyNews1) { FactoryGirl.create(:news, user_id: user.id) }
+		let!(:nowyNews2) { FactoryGirl.create(:news, user_id: user.id) }
+
+		it "powinien miec newsy w kolejnosci" do
+			expect(user.news.to_a).to eq [nowyNews2, nowyNews1, @news]
+		end
+	end
 end
