@@ -1,25 +1,39 @@
 <%= provide(:title, @news.title) %>
 
 <section class="col-md-9">
-<h3 id="top"><%= @news.title %></h3>
-<div class="row text-muted">
-	<div class="col-md-2 small">
-		<%= @news.user.username %>
+	<h3 id="top"><%= @news.title %></h3>
+	<div class="row text-muted small">
+		<div class="col-md-6 ">
+			Dodane przez: <%= @news.user.username %> | <%= link_to "Komentarze: #{@comments.count}", anchor: "news-comments" %>
+		</div>
+		<div class="col-md-6">
+			<div class="pull-right"><%= l(@news.created_at.to_datetime, format: :long) %></div>
+		</div>
 	</div>
-	<div class="col-md-3 col-md-offset-7 small">
-		<div class="pull-right"><%= l(@news.created_at.to_datetime, format: :long) %></div>
-	</div>
-</div>
 
-<br>
-<section>
-	<%= simple_format(@news.content, {}, sanitize: false) %>
+	<section id="news-content">
+
+		<%= simple_format(@news.content, {}, sanitize: false) %>
+
+	</section>
+	<%= render 'news/news_buttons' %>
+	<section id="news-comments">
+		<h4>Komentarze (<%= @comments.count %>)</h4>
+		<hr>
+
+		<%= render @comments %>
+
+	</section>
+
+	<section id="news-comments-add">
+
+		<%= render 'comments/comment_form' %>
+
+	</section>
+	<br>
+	<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
+
 </section>
-<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
-<% if current_user && current_user.admin? %>
-<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(@news), class: "btn btn-default btn-sm" %>
-<%= link_to "<span class='glyphicon glyphicon-trash'></span> usuń".html_safe, @news, method: :delete, data: { confirm: "Na pewno?" }, class: "btn btn-default btn-sm" %>
-<% end %>
-</section>
+
 
 <%= render 'static_pages/sidebar' %>

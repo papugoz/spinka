@@ -28,5 +28,4 @@ describe Comment do
 		its(:news) { should eq news }
 		its(:news_id) { should eq news.id }
 	end
-
 end

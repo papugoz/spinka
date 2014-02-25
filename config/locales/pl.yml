@@ -233,6 +233,8 @@ pl:
       news:
         title: "Tytuł"
         content: "Treść"
+      comment:
+        content: "Treć"
     errors:
       models:
         user:
@@ -252,5 +254,9 @@ pl:
           attributes:
             title:
               blank: "nie może być pusty"
+            content:
+              blank: "nie może być pusta"
+        comment:
+          attributes:
             content:
               blank: "nie może być pusta"

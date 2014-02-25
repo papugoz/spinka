@@ -18,6 +18,7 @@ before_action :admin_user, only: [:index, :new, :create, :edit, :update]
   def show
     if News.find_by(id: params[:id])
       @news = News.find_by(id: params[:id])
+      @comments = @news.comments.all
     else
       redirect_to root_url
     end

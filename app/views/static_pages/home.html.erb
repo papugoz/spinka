@@ -1,22 +1,4 @@
 <section class="col-md-9">
-	<% @news.each do |news| %>
-
-	<div class="panel panel-default">
-		<div class="panel-heading panel-title">
-			<%= link_to news.title, news_path(news) %>
-			<small class="pull-right text-muted"><%= l(news.created_at, format: :long) %></small>
-		</div>
-		<div class="panel-body">
-			<%= news.content.split(" ")[0..50].join(" ") + "..." %>
-		</div>
-		<% if current_user && current_user.admin? %>
-		<div class="panel-footer">
-			<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(news), class: "btn btn-default btn-sm" %>
-			<%= link_to "<span class='glyphicon glyphicon-trash'></span> usuń".html_safe, news, method: :delete, data: { confirm: "Na pewno?" }, class: "btn btn-default btn-sm" %>
-		</div>
-		<% end %>
-	</div>
-
-	<% end %>
+	<%= render @news %>
 </section>
 <%= render 'static_pages/sidebar' %>

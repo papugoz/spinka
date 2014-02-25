@@ -1,3 +1,5 @@
+// general
+
 .btn-primary {
 	a {
 		color: #fff
@@ -7,4 +9,21 @@
 .center-block {
 	float: none !important;
 	text-align: center;
+}
+
+textarea {
+	resize: vertical;
+}
+
+// news
+
+#news-content {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+// comments
+
+#news-comments {
+	margin-top: 40px;
 }

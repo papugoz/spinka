@@ -11,6 +11,8 @@ Spinka::Application.routes.draw do
 
   resources :news, path: '/newsy', path_names: { new: 'nowy', edit: 'edycja' }
 
+  resources :comments, path:'/komentarze', only: [:create, :edit, :update, :destroy], path_names: { edit: 'edycja' }
+
   get       '/onas'                   => 'static_pages#onas'
   get       '/pomoc'                  => 'static_pages#pomoc'
   get       '/kontakt'                => 'static_pages#kontakt'

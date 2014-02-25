@@ -1,0 +1,7 @@
+	<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
+	<% if @news.user.id == current_user.id || current_user.admin? %>
+	<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(@news), class: "btn btn-default btn-sm" %>
+	<% if current_user.admin? %>
+	<%= link_to "<span class='glyphicon glyphicon-trash'></span> usuń".html_safe, @news, method: :delete, data: { confirm: "Na pewno?" }, class: "btn btn-default btn-sm" %>
+	<% end %>
+	<% end %>

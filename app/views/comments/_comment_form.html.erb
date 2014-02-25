@@ -1,0 +1,8 @@
+<h5><b>Dodaj swój komentarz:</b></h5>
+<%= form_tag(comments_path, method: "post", class: "form") do %>
+<%= hidden_field(:comment, :news_id, value: @news.id) %>
+<%= hidden_field(:comment, :user_id, value: current_user.id) %>
+<%= text_area(:comment, :content, class: "form-control", rows: 5) %>
+<br>
+<%= submit_tag("Dodaj komentarz", class: "btn btn-default") %>
+<% end %>
