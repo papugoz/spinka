@@ -7,7 +7,9 @@
 	<%= @user.first_name %> <%= @user.last_name %>
 	<br>
 	email: <%= @user.email %>
+	<% if administrator or owner(@user.id) %>
 	<hr>
 	<div class="btn btn-sm btn-primary"><%= link_to "Edycja", edit_user_path(@user) %></div>
+	<% end %>
 	</div>
 </div>

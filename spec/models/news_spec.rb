@@ -5,7 +5,7 @@ describe News do
 	let(:user) { FactoryGirl.create(:user) }
 
 	before do
-		@news = user.news.build(title: "News#1", content: "Lorem ipsum")
+		@news = user.news.build(title: "News#1", teaser: "Lorem", content: "Lorem ipsum")
 	end
 
 	subject { @news }
@@ -14,6 +14,7 @@ describe News do
 	it { should respond_to(:user_id) }
 	it { should respond_to(:user) }
 	it { should respond_to(:content) }
+	it { should respond_to(:teaser) }
 
 	describe "sprawdzanie czy autor jest dobry" do
 		its(:user) { should eq user }

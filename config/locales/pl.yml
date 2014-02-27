@@ -233,6 +233,7 @@ pl:
       news:
         title: "Tytuł"
         content: "Treść"
+        teaser: "Zajawka"
       comment:
         content: "Treć"
     errors:
@@ -256,6 +257,9 @@ pl:
               blank: "nie może być pusty"
             content:
               blank: "nie może być pusta"
+            teaser:
+              blank: "nie może być pusta"
+              too_long: "jest za długa (maksymalnie 250 znaków)"
         comment:
           attributes:
             content:

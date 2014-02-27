@@ -33,12 +33,12 @@ module SessionsHelper
 	def signed_in_user
 		unless signed_in?
 			store_location
-			redirect_to logowanie_url, notice: "Jestes niezalogowany"
+			redirect_to logowanie_url, notice: "Jesteś niezalogowany"
 		end
 	end
 
 	def admin_user
-		redirect_to root_url unless @current_user.admin?
+		redirect_to root_url, notice: "Nie masz wystarczających uprawnień" unless @current_user.admin?
 	end
 
 	def correct_user
@@ -54,6 +54,14 @@ module SessionsHelper
 
 	def store_location
 		session[:return_to] = request.url if request.get?
+	end
+
+	def administrator
+		current_user && current_user.admin
+	end
+
+	def owner(object)
+		current_user && current_user.id == object
 	end
 
 end

@@ -1,6 +1,6 @@
 class NewsController < ApplicationController
 before_action :signed_in_user, only: [:index, :new, :create, :edit, :update]
-before_action :admin_user, only: [:index, :new, :create, :edit, :update]
+before_action :admin_user, only: [:new, :create, :edit, :update]
 
   def new
     @news = News.new
@@ -18,7 +18,7 @@ before_action :admin_user, only: [:index, :new, :create, :edit, :update]
   def show
     if News.find_by(id: params[:id])
       @news = News.find_by(id: params[:id])
-      @comments = @news.comments.all
+      @comments = @news.comments
     else
       redirect_to root_url
     end
@@ -36,7 +36,7 @@ before_action :admin_user, only: [:index, :new, :create, :edit, :update]
     @news = News.find_by(id: params[:id])
 
     if @news.update_attributes(news_params)
-      flash[:success] = "News zaktualizowany"
+      flash[:success] = "Artykuł zaktualizowany"
       redirect_to @news
     else
       render 'edit'
@@ -49,13 +49,13 @@ before_action :admin_user, only: [:index, :new, :create, :edit, :update]
 
   def destroy
     News.find(params[:id]).destroy
-    flash[:success] = "news usunięty."
+    flash[:success] = "Artykuł usunięty."
     redirect_to news_url
   end
 
   private
 
   def news_params
-    params.require(:news).permit(:title, :content)
+    params.require(:news).permit(:title, :teaser, :content)
   end
 end

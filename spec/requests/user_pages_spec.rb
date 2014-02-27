@@ -35,4 +35,25 @@ describe "user pages" do
 			it { should have_selector('div.alert.alert-danger') }
 		end
 	end
+
+	describe "strony profilowe" do
+		let(:regular_user) { FactoryGirl.create(:user) }
+		let(:admin_user) { FactoryGirl.create(:admin) }
+		describe "niezalogowany uzytkownik" do
+			describe "ogladanie czyjegos profilu" do
+				before { visit user_path(regular_user) }
+				it { should have_content(regular_user.username) }
+				it { should_not have_link("Edycja") }
+			end
+		end
+		describe "zalogowany zwykly uzytkownik" do
+			before { sign_in regular_user }
+			describe "ogladanie swojego profilu" do
+				before do
+					visit user_path(regular_user)
+				end
+				it { should have_link("Edycja") }
+			end
+		end
+	end
 end

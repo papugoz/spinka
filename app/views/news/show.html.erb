@@ -1,6 +1,7 @@
 <%= provide(:title, @news.title) %>
 
 <section class="col-md-9">
+
 	<h3 id="top"><%= @news.title %></h3>
 	<div class="row text-muted small">
 		<div class="col-md-6 ">
@@ -14,25 +15,28 @@
 	<section id="news-content">
 
 		<%= simple_format(@news.content, {}, sanitize: false) %>
+		<%= render 'news/news_buttons' %>
 
 	</section>
-	<%= render 'news/news_buttons' %>
+
 	<section id="news-comments">
+
+		<% if @comments.any? %>
 		<h4>Komentarze (<%= @comments.count %>)</h4>
 		<hr>
-
 		<%= render @comments %>
-
-	</section>
-
-	<section id="news-comments-add">
-
-		<%= render 'comments/comment_form' %>
+		<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
+		<% else %>
+		<h4>Artykuł nie został jeszcze skomentowany, bądź pierwszy</h4>
+		<% end %>
 
 	</section>
 	<br>
-	<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
-
+	<% if current_user %>
+	<section id="news-comments-add">
+		<%= render 'comments/comment_form' %>
+	</section>
+	<% end %>
 </section>
 
 

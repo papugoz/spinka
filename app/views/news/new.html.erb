@@ -12,7 +12,15 @@
 	<%= f.text_field :title, class: "form-control" %>
 </div>
 
+<div class="form-group">
+	<%= f.label :teaser, "Zajawka (max 250 znaków)" %>
+	<%= f.text_area :teaser, class: "form-control", rows: 5 %>
+</div>
+
+<div class="form-group">
+	<%= f.label :content, "Treść artykułu" %>
 <%= f.text_area :content, class: "form-control", rows: 15 %>
+</div>
 
 <br>
 

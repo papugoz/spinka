@@ -1,5 +1,5 @@
 <%= provide(:title, "#{@news.title} - edycja") %>
-
+<%= render 'shared/error_messages', object: @news %>
 <h3><%= @news.title %></h3>
 
 <%= form_for @news, html: { class: "form" } do |f| %>
@@ -9,7 +9,15 @@
 	<%= f.text_field :title, class: "form-control" %>
 </div>
 
-<%= f.text_area :content, class: "form-control", rows: 15 %>
+<div class="form-group">
+	<%= f.label :teaser, "Zajawka (max 250 znaków)" %>
+	<%= f.text_area :teaser, class: "form-control", rows: 5 %>
+</div>
+
+<div class="form-group">
+	<%= f.label :content, "Treść artykułu" %>
+	<%= f.text_area :content, class: "form-control", rows: 15 %>
+</div>
 
 <br>
 

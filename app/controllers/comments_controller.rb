@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+	before_action :signed_in_user, only: [:create, :edit, :update, :destroy]
+	before_action :admin_user, only: [:destroy]
 
 	def create
 		@comment = News.find_by(id: comment_params[:news_id]).comments.build(comment_params)
@@ -12,10 +14,15 @@ class CommentsController < ApplicationController
 	end
 
 	def edit
-		if Comment.find_by(id: params[:id])
+		if Comment.find_by(id: params[:id]) && (administrator || Comment.find_by(id: params[:id]).created_at + 10 > Time.now)
 			@comment = Comment.find_by(id: params[:id])
 		else
-			redirect_to root_url
+			if Comment.find_by(id: params[:id])
+				flash[:danger] = "Nie można edytować komentarzy do upływie 10 minut"
+				redirect_to news_path(Comment.find_by(id: params[:id]).news)
+			else
+				redirect_to root_url
+			end
 		end
 	end
 

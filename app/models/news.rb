@@ -5,4 +5,5 @@ class News < ActiveRecord::Base
 	validates :title, presence: true
 	validates :user_id, presence: true
 	validates :content, presence: true
+	validates :teaser, presence: true, length: { maximum: 250 }
 end

@@ -13,6 +13,7 @@ FactoryGirl.define do
 	factory :news do
 		sequence(:title) { |n| "News##{n}" }
 		user
+		teaser "Lorem"
 		content "Lorem Ipsum"
 	end
 
