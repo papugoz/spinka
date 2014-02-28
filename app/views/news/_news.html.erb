@@ -1,10 +1,10 @@
-<div class="panel panel-default">
+<div class="panel panel-default news">
 	<div class="panel-heading panel-title">
 		<%= link_to news.title, news_path(news) %>
 		<small class="pull-right text-muted"><%= l(news.created_at, format: :long) %></small>
 	</div>
 	<div class="panel-body">
-		<%= news.teaser %> <small class="text-muted"><%= link_to "dalej ->", news_path(news) %></small>
+		<%= news.teaser %> <small class="text-muted"><%= link_to "więcej", news_path(news) %></small>
 	</div>
 	<% if administrator %>
 	<div class="panel-footer">

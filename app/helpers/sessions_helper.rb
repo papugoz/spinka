@@ -37,6 +37,13 @@ module SessionsHelper
 		end
 	end
 
+	def not_signed_in_user
+		unless current_user.nil?
+			store_referrer
+			redirect_to root_url, notice: "Jesteś już zalogowany"
+		end
+	end
+
 	def admin_user
 		redirect_to root_url, notice: "Nie masz wystarczających uprawnień" unless @current_user.admin?
 	end
@@ -54,6 +61,10 @@ module SessionsHelper
 
 	def store_location
 		session[:return_to] = request.url if request.get?
+	end
+
+	def store_referrer
+		session[:return_to] = request.referrer
 	end
 
 	def administrator

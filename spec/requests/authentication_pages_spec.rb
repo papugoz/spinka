@@ -7,7 +7,8 @@ describe "AuthenticationPages" do
 	describe "logowanie" do
 		let(:user) { FactoryGirl.create(:user) }
 		before do
-			visit logowanie_path
+			visit root_url
+			click_link("Zaloguj")
 		end
 		it { should have_content("Zaloguj się") }
 		it { should have_field("username") }
@@ -36,6 +37,7 @@ describe "AuthenticationPages" do
 			it { should have_link('Profil') }
 			it { should_not have_link('Zaloguj') }
 			it { should_not have_link('Zarejestruj się') }
+			it { should have_content('div.panel.panel-default.news') }
 
 			describe "proboje sie zarejestrowac" do
 				before { visit rejestracja_path }
