@@ -5,12 +5,15 @@ describe "StaticPages" do
 	subject { page }
 
 	describe "glowna strona" do
+		let!(:news1) { FactoryGirl.create(:news) }
+
 		before { visit root_path }
 
 		it { should have_link("Poznaj nas", onas_path) }
 		it { should have_link("Pomoc",			pomoc_path) }
 		it { should have_link("Kontakt",		kontakt_path) }
 		it { should have_link("SPiNKa",			root_path) }
+		it { should have_selector('div.news') }
 	end
 
 	describe "tytuly" do

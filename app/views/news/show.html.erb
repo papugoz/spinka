@@ -32,11 +32,13 @@
 
 	</section>
 	<br>
-	<% if current_user %>
 	<section id="news-comments-add">
+		<% if current_user %>
 		<%= render 'comments/comment_form' %>
+		<% else %>
+		<h4 class="text-muted">Aby skomentować artykuł musisz być zalogowany</h4>
+		<% end %>
 	</section>
-	<% end %>
 </section>
 
 
