@@ -5,6 +5,7 @@ namespace :db do
     create_users
     create_news
     create_comments
+    populate_forum
   end
   def create_admin
     User.create!(username: "Admin",
@@ -18,7 +19,7 @@ namespace :db do
 
   def create_users
     99.times do |n|
-      username  = Faker::Internet.user_name + "#{n+1}"
+      username  = Faker::Name.first_name + "#{n+1}"
       email = "user#{n+1}@testowy.org"
       first_name = Faker::Name.first_name
       last_name = Faker::Name.last_name
@@ -35,20 +36,60 @@ namespace :db do
   def create_news
     user = User.first
     10.times do |n|
-      title = "News#{n+1}"
-      teaser = Faker::Lorem.sentence(5)
+      title = Faker::Lorem.sentence(5)
+      teaser = Faker::Lorem.sentence(10)
       content = Faker::Lorem.paragraph(50)
       user.news.create!(title: title, teaser: teaser, content: content)
     end
   end
 
   def create_comments
-    users = User.all(limit: 6)
-    5.times do |n|
+    300.times do
+      user_offset = rand(User.count)
+      random_user = User.first(offset: user_offset)
+      news_offset = rand(News.count)
+      random_news = News.first(offset: news_offset)
       content = Faker::Lorem.sentence(8)
-      News.all.each do |news|
-        users.each { |user| news.comments.create!(content: content, user_id: user.id) }
-      end
+      Comment.create!(content: content, user_id: random_user.id, news_id: random_news.id)
     end
   end
+
+  def populate_forum
+    create_categories
+    create_topics
+    create_posts
+  end
+
+  def create_categories
+    4.times do |n|
+      title = Faker::Lorem.sentence(1)
+      Category.create!(title: title)
+    end
+  end
+
+  def create_topics
+    50.times do |n|
+      title = Faker::Lorem.sentence(4)
+      content = Faker::Lorem.paragraph(25)
+      user_offset = rand(User.count)
+      random_user = User.first(offset: user_offset)
+      category_offset = rand(Category.count)
+      random_category = Category.first(offset: category_offset)
+
+      Topic.create!(title: "#{n}-#{title}", content: content, user_id: random_user.id, category_id: random_category.id)
+    end
+  end
+
+  def create_posts
+    500.times do
+      content = Faker::Lorem.paragraph(10)
+      user_offset = rand(User.count)
+      random_user = User.first(offset: user_offset)
+      topic_offset = rand(Topic.count)
+      random_topic = Topic.first(offset: topic_offset)
+
+      Post.create!(content: content, user_id: random_user.id, topic_id: random_topic.id)
+    end
+  end
+
 end

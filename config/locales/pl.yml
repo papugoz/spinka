@@ -1,8 +1,8 @@
 pl:
   will_paginate:
     page_gap: "&hellip;"
-    previous_label: "< poprzednia"
-    next_label: "następna >"
+    previous_label: "&laquo;"
+    next_label: "&raquo;"
   date:
     abbr_day_names:
     - nie
@@ -245,6 +245,7 @@ pl:
             username:
               blank: "nie może być pusty"
               too_long: "jest za długi"
+              invalid: 'może zawierać tylko litery, _ i spacje'
             email:
               blank: "nie może być pusty"
               invalid: "jest nieprawidłowy"

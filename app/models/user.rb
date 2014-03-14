@@ -3,12 +3,16 @@ class User < ActiveRecord::Base
 	before_create :create_remember_token
 
 	has_many :news
-	has_many :comments, through: :news
+	has_many :comments
+	has_many :topics
+	has_many :posts
 
 	has_secure_password
 	validates :password, length: { minimum: 6}, on: :create
 
-	validates :username, presence: true, length: { maximum: 25 }, uniqueness: { case_sensitive: false }
+	VALID_USERNAME = /\A[\w]*( ?[\w])*\z/i
+
+	validates :username, presence: true, length: { maximum: 25 },format: { with: VALID_USERNAME }, uniqueness: { case_sensitive: false }
 
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d]+)*\.[a-z]+\z/i
 	validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
@@ -20,6 +24,10 @@ class User < ActiveRecord::Base
 	def User.encrypt(token)
 		Digest::SHA1.hexdigest(token.to_s)
 	end
+
+	def to_param
+    "#{username}"
+  end
 
 	private
 

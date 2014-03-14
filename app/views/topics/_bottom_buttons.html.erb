@@ -1,0 +1,8 @@
+<% if owner(@topic.user.id) || administrator %>
+<div class="panel-footer">
+	<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_topic_path(@topic), class: "btn btn-default btn-sm" %>
+	<% if administrator %>
+	<%= render 'shared/delete_link', object: @topic %>
+	<% end %>
+</div>
+<% end %>

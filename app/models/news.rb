@@ -6,4 +6,7 @@ class News < ActiveRecord::Base
 	validates :user_id, presence: true
 	validates :content, presence: true
 	validates :teaser, presence: true, length: { maximum: 250 }
+	def to_param
+		"#{id}-#{title.parameterize}"
+	end
 end

@@ -22,4 +22,21 @@ FactoryGirl.define do
 		user
 		news
 	end
+
+	factory :category do
+		title "Kategoria"
+	end
+
+	factory :topic do
+		title "Topic"
+		content "Lorem Ipsum"
+		user
+		category
+	end
+
+	factory :post do
+		content "Lorem Ipsum"
+		topic
+		user
+	end
 end

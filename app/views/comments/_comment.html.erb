@@ -1,17 +1,27 @@
-<div class="panel panel-default comment" id="comment-<%= comment_counter+1 %>">
+<div class="panel-default entry" id="comment-<%= comment_counter+1 %>">
 	<div class="panel-heading panel-title">
-		<small><%= "##{comment_counter+1}" %></small> <%= render '/comments/comment_author', comment: comment %>
-		<small class="pull-right text-muted"><%= "#{time_ago_in_words(comment.created_at)} temu" %></small>
+<div class="row">
+		<span>
+			<%= "##{comment_counter+1}" %>
+		</span> <%= render '/shared/author', object: comment %>
+		<span class="pull-right text-muted data">
+			<%= "#{time_ago_in_words(comment.created_at)} temu" %>
+		</span>
+</div>
 	</div>
-	<div class="panel-body">
-		<%= comment.content %>
+	<div class="body">
+		<%= simple_format comment.content %>
 	</div>
 	<% if (owner(comment.user_id) && (comment.created_at + 10 * 60) > Time.now) || administrator %>
 	<div class="panel-footer">
-		<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_comment_path(comment), class: "btn btn-default btn-sm" %>
-		<% if current_user.admin? %>
-			<%= render 'shared/delete_link', object: comment %>
-		<% end %>
+		<div class="row">
+			<div class="pull-right">
+				<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_comment_path(comment), class: "btn btn-default btn-sm" %>
+				<% if current_user.admin? %>
+				<%= render 'shared/delete_link', object: comment %>
+				<% end %>
+			</div>
+		</div>
 	</div>
 	<% end %>
 </div>

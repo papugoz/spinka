@@ -16,4 +16,8 @@ class StaticPagesController < ApplicationController
 
 	end
 
+	def forum
+		@categories = Category.all
+	end
+
 end

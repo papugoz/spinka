@@ -1,0 +1,11 @@
+<div class="row">
+	<div class="col-md-12">
+		<%= render 'shared/error_messages', object: @post %>
+	</div>
+</div>
+
+<%= form_for @post, html: { class: "form" } do |f| %>
+	<%= f.text_area :content, class: "form-control", rows: 5 %>
+	<br>
+	<%= f.submit "Zatwierdź", class: "btn btn-primary" %>
+<% end %>

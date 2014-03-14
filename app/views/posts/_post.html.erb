@@ -1,0 +1,27 @@
+<div class="panel-default entry" id="post-<%= post_counter+1 %>">
+	<div class="panel-heading panel-title">
+<div class="row">
+		<span>
+			<%= "##{post_counter+1}" %>
+		</span> <%= render '/shared/author', object: post %>
+		<span class="pull-right text-muted data">
+			<%= "#{time_ago_in_words(post.created_at)} temu" %>
+		</span>
+</div>
+	</div>
+	<div class="body">
+		<%= simple_format post.content %>
+	</div>
+	<% if (owner(post.user_id) && (post.created_at + 10 * 60) > Time.now) || administrator %>
+	<div class="panel-footer">
+		<div class="row">
+			<div class="pull-right">
+				<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_post_path(post), class: "btn btn-default btn-sm" %>
+				<% if current_user.admin? %>
+				<%= render 'shared/delete_link', object: post %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>

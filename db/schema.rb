@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226152905) do
+ActiveRecord::Schema.define(version: 20140305113738) do
+
+  create_table "categories", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "news_id"
@@ -32,6 +38,31 @@ ActiveRecord::Schema.define(version: 20140226152905) do
     t.datetime "updated_at"
     t.string   "teaser"
   end
+
+  add_index "news", ["user_id"], name: "index_news_on_user_id"
+
+  create_table "posts", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "topics", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "topics", ["category_id"], name: "index_topics_on_category_id"
+  add_index "topics", ["user_id"], name: "index_topics_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "username"

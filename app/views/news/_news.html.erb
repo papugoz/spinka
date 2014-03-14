@@ -1,15 +1,22 @@
-<div class="panel panel-default news">
-	<div class="panel-heading panel-title">
-		<%= link_to news.title, news_path(news) %>
-		<small class="pull-right text-muted"><%= l(news.created_at, format: :long) %></small>
+<div class="news">
+	<div class="row heading">
+		<div class= "col-md-8 panel-title">
+			<%= link_to news.title, news_path(news) %>
+		</div>
+		<small class="col-md-4 text-muted">
+			<%= l(news.created_at, format: :long) %>
+		</small>
 	</div>
-	<div class="panel-body">
-		<%= news.teaser %> <small class="text-muted"><%= link_to "więcej", news_path(news) %></small>
+	<div class="body">
+		<%= link_to news.teaser, news_path(news) %>
 	</div>
-	<% if administrator %>
-	<div class="panel-footer">
-		<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(news), class: "btn btn-default btn-sm" %>
-		<%= render 'shared/delete_link', object: news %>
+	<div class="footer">
+		<%= link_to "komentarze (#{news.comments.count})", news_path(news, anchor: "news-comments") %>
+		<% if administrator %>
+		<div class= "pull-right">
+			<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(news), class: "btn btn-default btn-sm" %>
+			<%= render 'shared/delete_link', object: news %>
+		</div>
+		<% end %>
 	</div>
-	<% end %>
 </div>

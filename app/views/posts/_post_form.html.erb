@@ -1,0 +1,8 @@
+<h5><b>Dodaj swoją odpowiedź:</b></h5>
+<%= form_tag(topic_posts_path(topic_id: params[:id]), method: "post", class: "form") do %>
+<%= hidden_field(:post, :topic_id, value: @topic.id) %>
+<%= hidden_field(:post, :user_id, value: current_user.id) %>
+<%= text_area(:post, :content, class: "form-control", rows: 5) %>
+<br>
+<%= submit_tag("Dodaj odpowiedź", class: "btn btn-default") %>
+<% end %>

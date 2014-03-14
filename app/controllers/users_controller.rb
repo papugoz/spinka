@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find_by(id: params[:id])
+		@user = User.where('lower(username) = ?', params[:id].downcase).first
 	end
 
 	def index
@@ -28,11 +28,11 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find_by(id: params[:id])
+		@user = User.where('lower(username) = ?', params[:id].downcase).first
 	end
 
 	def update
-		@user = User.find_by(id: params[:id])
+		@user = User.where('lower(username) = ?', params[:id].downcase).first
 		user_params.delete(["password", "password_confirmation"])
 		if @user.update_attributes(user_params)
 			flash[:success] = "Profil zaktualizowany"
@@ -42,9 +42,8 @@ class UsersController < ApplicationController
 		end
 	end
 
-
 	def destroy
-		User.find(params[:id]).destroy
+		@user = User.where('lower(username) = ?', params[:id].downcase).first.destroy
 		flash[:success] = "użytkonik usunięty."
 		redirect_to users_url
 	end

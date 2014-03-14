@@ -1,0 +1,50 @@
+<% provide(:title, 'Forum') %>
+
+<section class="col-md-11">
+
+	<h4>Forum</h4>
+	<% @categories.each do |category| %>
+	<div class="panel panel-default table-responsive">
+		<!-- Default panel contents -->
+		<div class="panel-heading"><b><%= link_to category.title, category %></b></div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="col-md-6"><small>Temat</small></th>
+					<th class="col-md-2 centered"><small>Data założenia</small></th>
+					<th class="col-md-2 centered"><small>Ilość odpowiedzi</small></th>
+					<th class="col-md-2 centered"><small>Ostatnia odpowiedź</small></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% category.topics.each do |topic| %>
+				<tr>
+					<td>
+						<%= link_to render('topics/title', object: topic.title) , topic %>
+					</td>
+					<td class="centered">
+						<small>
+							<%= l(topic.created_at, format: :short) %>
+						</small>
+					</td>
+					<td class="centered">
+						<small>
+							<%= topic.posts.count %>
+						</small>
+					</td>
+					<td class="centered">
+						<small>
+							<% if topic.posts.any? %>
+							<%= "#{time_ago_in_words(topic.posts.first.created_at)} temu" %>
+							<% else %>
+							-
+							<% end %>
+						</small>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<% end %>
+</section>

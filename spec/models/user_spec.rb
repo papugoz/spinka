@@ -15,6 +15,8 @@ describe User do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:admin) }
 	it { should respond_to(:news) }
+	it { should respond_to(:topics) }
+	it { should respond_to(:posts) }
 
 	it { should be_valid }
 

@@ -11,13 +11,30 @@ Spinka::Application.routes.draw do
 
   resources :news, path: '/newsy', path_names: { new: 'nowy', edit: 'edycja' }
 
-  resources :comments, path:'/komentarze', only: [:create, :edit, :update, :destroy], path_names: { edit: 'edycja' }
+  resources :comments, path:'/komentarze', only: [:create, :edit, :update, :destroy], path_names: { edit: 'edycja-komentarza' }
+
+  # resources :categories do
+  #   path: '/forum' 
+  #   path_names: { new: 'nowa-kategoria', edit: 'edycja-kategorii' }
+  #   resources :topics, path_names: { new: 'nowy-temat', edit: 'edycja-tematu' } do
+  #     resources :posts, path_names: { edit: 'edycja-odpowiedzi' }
+  #   end
+  # end
+
+  shallow do
+    scope shallow_path: 'forum' do
+      resources :categories, path: 'kategorie' do
+        resources :topics, path: 'tematy' do
+          resources :posts, path: 'odpowiedzi'
+        end
+      end
+    end
+  end
 
   get       '/onas'                   => 'static_pages#onas'
   get       '/pomoc'                  => 'static_pages#pomoc'
   get       '/kontakt'                => 'static_pages#kontakt'
-
-
+  get       '/forum'                  => 'static_pages#forum'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

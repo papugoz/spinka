@@ -1,0 +1,21 @@
+<%= provide(:title, "#{@topic.title} - edycja") %>
+<%= render 'shared/error_messages', object: @topic %>
+<h3><%= @topic.title %></h3>
+
+<%= form_for @topic, html: { class: "form" } do |f| %>
+
+<div class="form-group">	
+	<%= f.label :title, "Tytuł" %>
+	<%= f.text_field :title, class: "form-control" %>
+</div>
+
+<div class="form-group">
+	<%= f.label :content, "Treść tematu" %>
+	<%= f.text_area :content, class: "form-control", rows: 15 %>
+</div>
+
+<br>
+
+<%= f.submit "Aktualizuj", class: "btn btn-primary" %>
+
+<% end %>

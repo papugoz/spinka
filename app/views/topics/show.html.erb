@@ -1,0 +1,33 @@
+<%= provide(:title, @topic.title) %>
+
+<section class="col-md-9">
+
+	<div class="panel-default entry">
+		<div class="panel-heading">
+			<h3 class="panel-title"><b><%= render 'title', object: @topic.title %></b></h3>
+		</div>
+		<div class="body">
+			<%= simple_format @topic.content %>
+		</div>
+		<%= render 'bottom_buttons' %>
+	</div>
+
+	<section id="topic-posts">
+
+		<% if @posts.any? %>
+		<h4>Odpowiedzi (<%= @posts.count %>)</h4>
+		<hr>
+		<%= render @posts %>
+		<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
+		<% else %>
+		<h4>Jeszcze nie ma odpowiedzi w tym temacie, bądź pierwszy</h4>
+		<% end %>
+	</section>
+	<section id="entry-comments-add">
+		<% if current_user %>
+		<%= render 'posts/post_form' %>
+		<% else %>
+		<h4 class="text-muted">Aby dodać odpowiedź musisz być zalogowany</h4>
+		<% end %>
+	</section>
+</section>

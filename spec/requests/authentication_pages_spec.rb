@@ -39,7 +39,7 @@ describe "AuthenticationPages" do
 			it { should have_link('Profil') }
 			it { should_not have_link('Zaloguj') }
 			it { should_not have_link('Zarejestruj się') }
-			it { should have_selector('div.panel.panel-default.news') }
+			it { should have_selector('div.news') }
 
 			describe "proboje sie zarejestrowac" do
 				before { visit rejestracja_path }

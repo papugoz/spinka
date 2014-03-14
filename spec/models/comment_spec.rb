@@ -15,12 +15,11 @@ describe Comment do
 	it { should respond_to(:news_id) }
 	it { should respond_to(:news) }
 	it { should respond_to(:user_id) }
+	it { should respond_to(:user) }
 	it { should respond_to(:content) }
 
 	describe "prawidlowy uzytkownik" do
-		it "wywolanie uzytkownika" do
-			expect(@comment.news.user).to eq user
-		end
+		its(:user) { should eq user }
 		its(:user_id) { should eq user.id }
 	end
 
