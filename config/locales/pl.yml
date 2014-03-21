@@ -245,7 +245,7 @@ pl:
             username:
               blank: "nie może być pusty"
               too_long: "jest za długi"
-              invalid: 'może zawierać tylko litery, _ i spacje'
+              invalid: 'może zawierać tylko litery, cyfry, _ i spacje'
             email:
               blank: "nie może być pusty"
               invalid: "jest nieprawidłowy"

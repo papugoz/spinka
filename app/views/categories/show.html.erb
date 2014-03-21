@@ -2,7 +2,7 @@
 
 <h4><%= @category.title %></h4>
 <hr>
-	<%= link_to "<span class='glyphicon glyphicon-file'></span> nowy temat".html_safe, new_category_topic_path(category_id: @category.id), class: "btn btn-primary btn-xs" %>
+<%= link_to "<span class='glyphicon glyphicon-file'></span> nowy temat".html_safe, new_category_topic_path(category_id: @category.id), class: "btn btn-primary btn-xs" %>
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -13,19 +13,22 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @category.topics.each do |topic| %>
+		<% @topics.each do |topic| %>
 		<tr>
 			<td><%= link_to render('topics/title', object: topic.title) , topic %></td>
 			<td class="centered"><%= l(topic.created_at, format: :short) %></td>
-			<td class="centered"><%= topic.posts.count %></td>
+			<td class="centered"><%= topic.post_count %></td>
 			<td class="centered">
-				<% if topic.posts.any? %>
-				<%= "#{time_ago_in_words(topic.posts.first.created_at)} temu" %>
-				<% else %>
+				<% if topic.last_post.blank? %>
 				-
+				<% else %>
+				<%= "#{time_ago_in_words(topic.last_post)} temu" %>	
 				<% end %>
 			</td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
+<div class="center-block">
+	<%= will_paginate @topics, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+</div>

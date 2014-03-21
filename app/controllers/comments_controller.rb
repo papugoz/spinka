@@ -14,12 +14,12 @@ class CommentsController < ApplicationController
 	end
 
 	def edit
-		if Comment.find_by(id: params[:id]) && (administrator || Comment.find_by(id: params[:id]).created_at + 10 > Time.now)
-			@comment = Comment.find_by(id: params[:id])
+		if Comment.find_by_id(params[:id]) && (administrator || Comment.find_by_id(params[:id]).created_at + 10 > Time.now)
+			@comment = Comment.find_by_id(params[:id])
 		else
-			if Comment.find_by(id: params[:id])
+			if Comment.find_by_id(params[:id])
 				flash[:danger] = "Nie można edytować komentarzy do upływie 10 minut"
-				redirect_to news_path(Comment.find_by(id: params[:id]).news)
+				redirect_to news_path(Comment.find_by_id(params[:id]).news)
 			else
 				redirect_to root_url
 			end
@@ -27,14 +27,14 @@ class CommentsController < ApplicationController
 	end
 
 	def update
-		@comment = Comment.find_by(id: params[:id])
+		@comment = Comment.find_by_id(params[:id])
 		if (@comment.created_at + 10 * 60 > Time.now || current_user.admin?) && @comment.update_attributes(comment_params)
 			flash[:success] = "Komentarz zaktualizowany"
 			redirect_to News.find_by(id: @comment.news.id)
 		else
 			if @comment.created_at + 10 * 60 < Time.now
 				flash[:danger] = "Nie można edytować komentarzy do upływie 10 minut"
-				redirect_to News.find_by(id: @comment.news.id)
+				redirect_to News.find_by_id(@comment.news.id)
 			else
 				render 'edit'
 			end

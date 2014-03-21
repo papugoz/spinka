@@ -3,14 +3,16 @@ class User < ActiveRecord::Base
 	before_create :create_remember_token
 
 	has_many :news
+	has_many :forum_layouts, dependent: :destroy
 	has_many :comments
 	has_many :topics
 	has_many :posts
+	has_many :last_readed_posts, dependent: :destroy
 
 	has_secure_password
 	validates :password, length: { minimum: 6}, on: :create
 
-	VALID_USERNAME = /\A[\w]*( ?[\w])*\z/i
+	VALID_USERNAME = /\A[\w\dęóąśłżźćń]+( ?[\w\dęóąśłżźćń]+)*\z/i
 
 	validates :username, presence: true, length: { maximum: 25 },format: { with: VALID_USERNAME }, uniqueness: { case_sensitive: false }
 

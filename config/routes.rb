@@ -13,19 +13,13 @@ Spinka::Application.routes.draw do
 
   resources :comments, path:'/komentarze', only: [:create, :edit, :update, :destroy], path_names: { edit: 'edycja-komentarza' }
 
-  # resources :categories do
-  #   path: '/forum' 
-  #   path_names: { new: 'nowa-kategoria', edit: 'edycja-kategorii' }
-  #   resources :topics, path_names: { new: 'nowy-temat', edit: 'edycja-tematu' } do
-  #     resources :posts, path_names: { edit: 'edycja-odpowiedzi' }
-  #   end
-  # end
+  resources :forum_layouts, only: [:create, :update]
 
   shallow do
     scope shallow_path: 'forum' do
-      resources :categories, path: 'kategorie' do
-        resources :topics, path: 'tematy' do
-          resources :posts, path: 'odpowiedzi'
+      resources :categories, path: 'kategorie', path_names: { new: 'nowa', edit: 'edycja' } do
+        resources :topics, path: 'tematy', only: [ :new, :create, :edit, :update, :show, :destroy ], path_names: { new: 'nowy', edit: 'edycja' } do
+          resources :posts, path: 'odpowiedzi', path_names: { edit: 'edycja' }
         end
       end
     end

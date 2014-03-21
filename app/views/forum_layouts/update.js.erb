@@ -1,0 +1,7 @@
+<% if @category.forum_layouts.find_by_user_id(current_user.id).collapsed == true %>
+$("#collapse_form-<%= @category.id %>").html("<%= escape_javascript(render('categories/collapse_form', object: @category.id)) %>")
+$("<%= "##{@category.title.split(" ").join("-")}" %>"	).collapse('hide')
+<% else %>
+$("#collapse_form-<%= @category.id %>").html("<%= escape_javascript(render('categories/collapse_form', object: @category.id)) %>")
+$("<%= "##{@category.title.split(" ").join("-")}" %>").collapse('show')
+<% end %>

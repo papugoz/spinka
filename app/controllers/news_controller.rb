@@ -16,8 +16,8 @@ before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   end
 
   def show
-    if News.find_by(id: params[:id])
-      @news = News.find_by(id: params[:id])
+    if News.find_by_id(params[:id])
+      @news = News.find_by_id(params[:id])
       @comments = @news.comments
     else
       redirect_to root_url
@@ -25,15 +25,15 @@ before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   end
 
   def edit
-    if News.find_by(id: params[:id])
-      @news = News.find_by(id: params[:id])
+    if News.find_by_id(params[:id])
+      @news = News.find_by_id(params[:id])
     else
       redirect_to root_url
     end
   end
 
   def update
-    @news = News.find_by(id: params[:id])
+    @news = News.find_by_id(params[:id])
 
     if @news.update_attributes(news_params)
       flash[:success] = "Artykuł zaktualizowany"

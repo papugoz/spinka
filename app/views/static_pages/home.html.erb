@@ -1,4 +1,21 @@
 <section class="col-md-9">
 	<%= render @news %>
 </section>
-<%= render 'static_pages/sidebar' %>
+<aside class="col-md-3">
+	<%= render 'static_pages/sidebar' %>
+	<div class="panel panel-default add-news">
+		<div class="panel-heading">
+			<h3 class="panel-title">Starsze newsy</h3>
+		</div>
+		<div class="list-group">
+			<% @side_news.each do |news| %>
+			<%= link_to news.title.first(25), news, class: "list-group-item small" %>
+			<% end %>
+		</div>
+		<div class="panel-footer">
+			<small class="center-block">
+				<%= link_to 'Wszystkie', news_index_path %>
+			</small>
+		</div>
+	</div>
+</aside>

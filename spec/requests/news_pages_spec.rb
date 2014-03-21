@@ -73,7 +73,7 @@ describe "News pages" do
 			it { should have_link("na górę") }
 			it { should_not have_link("edytuj") }
 			it { should_not have_link("usuń") }
-			it { should have_selector('div.panel.panel-default.comment#comment-1') }
+			it { should have_selector('div.panel-default.entry#comment-1') }
 			it { should have_content('Aby skomentować artykuł musisz być zalogowany') }
 		end
 
@@ -86,7 +86,7 @@ describe "News pages" do
 			it { should have_link("na górę") }
 			it { should_not have_link("edytuj") }
 			it { should_not have_link("usuń") }
-			it { should have_selector('div.panel.panel-default.comment#comment-1') }
+			it { should have_selector('div.panel-default.entry#comment-1') }
 			it { should have_selector('section#news-comments-add') }
 
 			describe "try to edit" do

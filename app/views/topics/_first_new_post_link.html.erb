@@ -1,0 +1,5 @@
+<% if object.new_posts(current_user) > 0 %>
+	<% @page = (object.post_count - object.new_posts(current_user)) / WillPaginate.per_page + 1 %>
+	<% @id = "post-#{ (object.post_count - object.new_posts(current_user)) + 1 }" %>
+	<%= link_to "<small class='text-warning'><span class='glyphicon glyphicon-asterisk'></span></small>".html_safe, topic_path(object, page: @page, anchor: @id), title: "nowe posty" %>
+<% end %>

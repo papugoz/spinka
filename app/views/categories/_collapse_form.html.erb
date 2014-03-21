@@ -1,0 +1,7 @@
+<% if current_user %>
+	<% if Category.find_by_id(object).collapsed?(current_user) %>
+		<%= render 'categories/uncollapse', cat: object %>
+	<% else %>
+		<%= render 'categories/collapse', cat: object %>
+	<% end %>
+<% end %>

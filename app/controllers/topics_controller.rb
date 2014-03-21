@@ -1,8 +1,8 @@
 class TopicsController < ApplicationController
-before_action :signed_in_user, only: [:new, :create, :edit, :update, :destroy]
-before_action :admin_user, only: [:destroy]
-before_action only: [:edit, :update] do
-	owner_or_admin(Topic.find_by_id(params[:id]))
+	before_action :signed_in_user, only: [:new, :create, :edit, :update, :destroy]
+	before_action :admin_user, only: [:destroy]
+	before_action only: [:edit, :update] do
+		owner_or_admin(Topic.find_by_id(params[:id]))
 	end
 
 	def new
@@ -12,6 +12,7 @@ before_action only: [:edit, :update] do
 
 	def create
 		@topic = current_user.topics.build(topic_params)
+		@topic.last_post = DateTime.now
 		if @topic.save
 			redirect_to @topic
 		else
@@ -21,11 +22,14 @@ before_action only: [:edit, :update] do
 
 	def show
 		@topic = Topic.find_by_id(params[:id])
-		@posts = @topic.posts
+		@posts = @topic.posts.paginate(page: params[:page])
+		if current_user && @posts.any?
+			@topic.read!(current_user, @posts.last.id)
+		end
 	end
 
 	def edit
-		if Topic.find_by(id: params[:id])
+		if Topic.find_by_id(params[:id])
 			@topic = Topic.find_by(id: params[:id])
 		else
 			redirect_to root_url
@@ -33,7 +37,7 @@ before_action only: [:edit, :update] do
 	end
 
 	def update
-		@topic = Topic.find_by(id: params[:id])
+		@topic = Topic.find_by_id(params[:id])
 
 		if @topic.update_attributes(topic_params)
 			flash[:success] = "Temat zaktualizowany"

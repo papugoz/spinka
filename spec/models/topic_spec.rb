@@ -16,6 +16,8 @@ describe Topic do
 	it { should respond_to(:user_id) }
 	it { should respond_to(:user) }
 	it { should respond_to(:posts) }
+	it { should respond_to(:last_post) }
+	it { should respond_to(:post_count) }
 
 	its(:user) { should eq user1 }
 	its(:category) { should eq category1 }

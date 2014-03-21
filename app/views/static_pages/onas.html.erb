@@ -1,7 +1,7 @@
 <% provide(:title, 'O nas') %>
 <section class="col-md-9">
 	<p>
-	Stowarzyszenie Pomocy Niepełnosprawnym Kierowcom SPiNKa powstało w 2006 roku. Od początku działalności przyświecał nam jeden główny cel:
+		Stowarzyszenie Pomocy Niepełnosprawnym Kierowcom SPiNKa powstało w 2006 roku. Od początku działalności przyświecał nam jeden główny cel:
 		Stworzyć w Polsce profesjonalny rynek usług motoryzacyjnych dla środowiska niepełnosprawnych kierowców i pasażerów.
 	</p>
 	<br>
@@ -61,14 +61,5 @@
 </section>
 
 <aside class="col-md-3">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h6 class="panel-title">Nasi Sponsorzy</h6>
-		</div>
-		<div class="panel-body">
-			<%= image_tag "firstad.jpg", alt: 'ad1', class: 'img-thumbnail' %>
-			<hr>
-			<%= image_tag "secondad.jpg", alt: 'ad2', class: 'img-thumbnail' %>
-		</div>
-	</div>
+	<%= render 'static_pages/sidebar' %>
 </aside>
