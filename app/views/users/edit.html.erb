@@ -31,6 +31,17 @@
 			<%= f.text_field :email, class: "form-control", text: @user.email %>
 		</div>
 	</div>
+	<% if current_user && current_user.admin? %>
+	<div class="checkbox">
+		<%= f.label :moderator, "moderator" %>
+		<%= f.check_box :moderator %>
+	</div>
+	<div class="checkbox">
+		<%= f.label :editor, "redaktor" %>
+		<%= f.check_box :editor %>
+	</div>
+	<% end %>
+
 	<div class="col-md-offset-4">
 		<%= f.submit "aktualizuj", class: "btn btn-large btn-primary" %>
 	</div>

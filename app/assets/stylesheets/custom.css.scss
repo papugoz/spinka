@@ -33,7 +33,7 @@ textarea {
 }
 
 .entry {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 	.panel-heading {
 		border: 1px solid #ededed;
 		padding: 10px 15px;
@@ -145,5 +145,18 @@ textarea {
 	a {
 		text-decoration: none;
 		color: inherit;
+	}
+}
+
+// Pagination
+
+.pagination {
+	margin: 20px 0 20px 0;
+	li > a {
+		color: #999;
+	}
+	.active {
+		background-color: #999 !important;
+		border-color: #999 !important;
 	}
 }

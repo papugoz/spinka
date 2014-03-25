@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update, :index]
 	before_action :correct_user, only: [:edit, :update]
-	before_action :admin_user, only: [:index]
+	before_action :admin_user, only: [:destroy]
 	before_action :not_signed_in?, only: [:new, :create]
 
 	def new
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
+		params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :moderator, :editor)
 	end
 
 	def not_signed_in?

@@ -1,0 +1,5 @@
+<% if params[:order] == ordering && params[:asc] == 'ASC' %>
+<%= link_to "<span class='small glyphicon glyphicon-sort'></span> #{label}".html_safe, users_path(order: ordering, asc: 'DESC', page: params[:page]) %>
+<% else %>
+<%= link_to "<span class='small glyphicon glyphicon-sort'></span> #{label}".html_safe, users_path(order: ordering, asc: 'ASC', page: params[:page]) %>
+<% end %>

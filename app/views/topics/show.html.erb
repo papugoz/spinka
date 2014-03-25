@@ -1,24 +1,24 @@
 <%= provide(:title, @topic.title) %>
 
 <section class="col-md-9">
-
 	<div class="panel-default entry">
 		<div class="panel-heading">
-			<h3 class="panel-title"><b><%= @topic.title %></b></h3>
+			<h3 class="panel-title">
+				<b><%= @topic.title %></b>
+			</h3>
 		</div>
 		<div class="body">
 			<%= simple_format @topic.content %>
 		</div>
 		<%= render 'bottom_buttons' %>
 	</div>
-
 	<section id="topic-posts">
 
 		<% if @posts.any? %>
 		<h4>Odpowiedzi (<%= @posts.count %>)</h4>
 		<hr>
 		<%= render @posts %>
-		<%= will_paginate @posts, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+		<%= pagination_links(@posts) %>
 		<br>
 		<a href="#top" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-up"></span> na górę</a>
 		<% else %>

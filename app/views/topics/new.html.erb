@@ -8,7 +8,7 @@
 	</div>
 </div>
 <%= form_for shallow_args(@category, @topic), html: { class: "form" } do |f| %>
-<%= f.hidden_field :category_id, value: @category.id  %>
+<%= f.hidden_field :category_id, value: params[:category_id]  %>
 <div class="form-group">
 	<%= f.label :title, "Tytuł" %>
 	<%= f.text_field :title, class: "form-control" %>

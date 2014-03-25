@@ -1,0 +1,36 @@
+<% @current_path = request.original_url %>
+<% if @current_path.match('forum') && !@current_path.split('/').last.match('forum') %>
+<small>
+	<ol class="breadcrumb">
+		<li><%= link_to "Forum", forum_url %></li>
+		<% if @current_path.include?('/odpowiedzi/') %>
+			<% @po = Post.find_by_id(params[:id]) %>
+			<li><%= link_to @po.topic.category.title, category_path(@po.topic.category) %></li>
+			<li><%= link_to @po.topic.title, topic_path(@po.topic) %></li>
+			<% if @current_path.match(/edycja\z/) %>
+				<li class="active">Edycja odpowiedzi</li>
+			<% else %>
+				<li class="active"><%= @po.id %></li>
+			<% end %>
+		<% elsif @current_path.include?('/tematy/') %>
+			<% if @current_path.match(/nowy\z/) %>
+				<% @cat = Category.find_by_id(params[:category_id]) %>
+				<li><%= link_to @cat.title, category_path(@cat) %></li>
+				<li class="active">Nowy temat</li>
+			<% elsif @current_path.match(/edycja\z/) %>
+				<% @top = Topic.find_by_id(params[:id]) %>
+				<li><%= link_to @top.category.title, category_path(@top.category) %></li>
+				<li><%= link_to @top.title, topic_path(@top) %></li>
+				<li class="active">Edycja</li>
+			<% else %>
+				<% @top = Topic.find_by_id(params[:id]) %>
+				<li><%= link_to @top.category.title, category_path(@top.category) %></li>
+				<li><%= @top.title %></li>
+			<% end %>
+		<% elsif @current_path.include?('/kategorie/') %>
+			<% @cat = Category.find_by_id(params[:id]) %>
+			<li class="active"><%= @cat.title %></li>
+		<% end %>
+	</ol>
+</small>
+<% end %>

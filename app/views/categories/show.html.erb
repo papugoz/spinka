@@ -2,7 +2,10 @@
 
 <h4><%= @category.title %></h4>
 <hr>
+<% if current_user %>
 <%= link_to "<span class='glyphicon glyphicon-file'></span> nowy temat".html_safe, new_category_topic_path(category_id: @category.id), class: "btn btn-primary btn-xs" %>
+<% end %>
+<% if @topics.any? %>
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -15,20 +18,35 @@
 	<tbody>
 		<% @topics.each do |topic| %>
 		<tr>
-			<td><%= link_to render('topics/title', object: topic.title) , topic %></td>
-			<td class="centered"><%= l(topic.created_at, format: :short) %></td>
-			<td class="centered"><%= topic.post_count %></td>
+			<td>
+				<% if current_user && topic.readed?(current_user) %>
+				<%= render 'topics/first_new_post_link', object: topic %>
+				<% end %>
+				<%= link_to render('topics/title', object: topic.title) , topic %>
+			</td>
+			<td class="centered">
+				<%= l(topic.created_at, format: :short) %>
+			</td>
+			<td class="centered">
+				<%= topic.post_count%>
+				<% if current_user && topic.readed?(current_user) %>
+				<%= " (+#{topic.new_posts(current_user)})" %>
+				<% end %>
+			</td>
 			<td class="centered">
 				<% if topic.last_post.blank? %>
 				-
 				<% else %>
-				<%= "#{time_ago_in_words(topic.last_post)} temu" %>	
+				<%= "#{time_ago_in_words(topic.last_post)} temu" %>
 				<% end %>
 			</td>
 		</tr>
 		<% end %>
 	</tbody>
 </table>
-<div class="center-block">
-	<%= will_paginate @topics, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
-</div>
+<%= pagination_links(@topics) %>
+<% else %>
+<br>
+<br>
+<h4>Nie ma tu niczego</h4>
+<% end %>

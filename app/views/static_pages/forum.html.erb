@@ -12,7 +12,8 @@
 				<%= render 'categories/collapse_form', object: category.id %>
 			</div>
 		</div>
-		<div id=<%= category.title.split(" ").join("-") %> class="collapse <%= "in" unless category.forum_layouts.find_by(user_id: current_user).try(:collapsed) == true %>">
+		<div id="<%= category.title.split(" ").join("-") %>" class="collapse <%= 'in' unless category.forum_layouts.find_by(user_id: current_user).try(:collapsed) == true %>">
+			<% if category.topics.any? %>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -26,9 +27,9 @@
 					<% category.topics.first(10).each do |topic| %>
 					<tr>
 						<td>
-						<% if topic.readed?(current_user) %>
-						<%= render 'topics/first_new_post_link', object: topic %>
-						<% end %>
+							<% if current_user && topic.readed?(current_user) %>
+							<%= render 'topics/first_new_post_link', object: topic %>
+							<% end %>
 							<%= link_to render('topics/title', object: topic.title) , topic %>
 						</td>
 						<td class="centered">
@@ -39,7 +40,7 @@
 						<td class="centered">
 							<small>
 								<%= topic.post_count%>
-								<% if topic.readed?(current_user) %>
+								<% if current_user && topic.readed?(current_user) %>
 								<%= " (+#{topic.new_posts(current_user)})" %>
 								<% end %>
 							</small>
@@ -57,6 +58,11 @@
 					<% end %>
 				</tbody>
 			</table>
+			<% else %>
+			<div class="panel-body">
+			<h5 class="text-muted">Nie ma tu niczego</h5>
+			</div>			
+			<% end %>
 		</div>
 	</div>
 	<% end %>

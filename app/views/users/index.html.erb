@@ -2,27 +2,35 @@
 
 <h3>Użytkownicy:</h3>
 
-<div class="center-block">
-<%= will_paginate @users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
-</div>
+<%= pagination_links(@users) %>
 
 <table class="table table-hover">
-<thead>
-	<tr>
-		<th>Login</th>
-		<th>Email</th>
-		<th>Imie</th>
-		<th>Nazwisko</th>
-		<th></th>
-	</tr>
-</thead>
+	<thead>
+		<tr>
+			<th>
+				<%= render 'users/order_link', ordering: 'username', label: 'Login' %>
+			</th>
+			<th>
+				<%= render 'users/order_link', ordering: 'email', label: 'Email' %>
+			</th>
+			<th>
+				<%= render 'users/order_link', ordering: 'first_name', label: 'Imie' %>
+			</th>
+			<th>
+				<%= render 'users/order_link', ordering: 'last_name', label: 'Nazwisko' %>
+			</th>
+			<th>Funkcje</th>
+			<th></th>
+		</tr>
+	</thead>
 	<tbody>
-		<% @users.each do |user| %>
+		<% @users.order("#{params[:order]} #{params[:asc]}").each do |user| %>
 		<tr>
 			<td><%= link_to user.username, user_path(user) %></td>
 			<td><%= user.email %></td>
 			<td><%= user.first_name %></td>
 			<td><%= user.last_name %></td>
+			<td><%= 'Administrator' if user.admin == true %> <%= 'Moderator' if user.moderator == true %> <%= 'Redaktor' if user.editor == true %></td>
 			<% if current_user.admin? && !current_user?(user) %>
 			<td>
 				<%= link_to "usuń", user, method: :delete, data: { confirm: "Na pewno?" } %>
@@ -33,6 +41,4 @@
 	</tbody>
 </table>
 
-<div class="center-block">
-<%= will_paginate @users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
-</div>
+<%= pagination_links(@users) %>
