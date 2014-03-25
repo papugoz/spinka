@@ -28,4 +28,5 @@ Spinka::Application.configure do
   config.assets.debug = true
 
   config.i18n.available_locales = [ :pl, :en ]
+  config.assets.raise_production_errors = true
 end

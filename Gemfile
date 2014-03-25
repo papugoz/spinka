@@ -21,6 +21,7 @@ group :development, :test do
 	gem 'spork-rails'
   gem 'guard-spork'
   gem 'childprocess'
+  gem 'sprockets_better_errors'
 end
 
 group :test do
