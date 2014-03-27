@@ -1,6 +1,7 @@
 class NewsController < ApplicationController
-before_action :signed_in_user, only: [:index, :new, :create, :edit, :update, :destroy]
-before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+before_action :signed_in_user, only: [ :new, :create, :edit, :update, :destroy]
+before_action :editor_user, only: [:new, :create, :edit, :update, :destroy]
+
 
   def new
     @news = News.new
@@ -44,7 +45,7 @@ before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   end
 
   def index
-    @news = News.paginate(page: params[:page])
+    @news = News.paginate(page: params[:page], per_page: 10)
   end
 
   def destroy

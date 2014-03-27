@@ -1,34 +1,16 @@
-<% provide(:title, "Nwesy") %>
+<% provide(:title, "Aktualności") %>
 
 <section class="col-md-9">
-	<h3>Newsy:</h3>
+	<h3>Aktualności:</h3>
 	<% if administrator %>
 	<%= link_to "<span class='glyphicon glyphicon-plus'></span> dodaj nowy".html_safe, new_news_path, class: "btn btn-default btn-sm" %>
 	<br>
 	<% end %>
 	<br>
-	<% @news.each do |news| %>
 
-	<div class="panel panel-default">
-		<div class="panel-heading panel-title">
-			<%= link_to news.title, news_path(news) %>
-			<small class="pull-right text-muted"><%= l(news.created_at, format: :long) %></small>
-		</div>
-		<div class="panel-body">
-			<%= news.teaser %>
-		</div>
-		<% if administrator %>
-		<div class="panel-footer">
-			<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_news_path(news), class: "btn btn-default btn-sm" %>
-			<%= render 'shared/delete_link', object: news %>
-		</div>
-		<% end %>
-	</div>
-	<% end %>
+<%= render @news %>
 
-	<div class="center-block">
-		<%= will_paginate @users, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
-	</div>
+	<%= pagination_links(@news) %>
 </section>
 <aside class="col-md-3">
 	<%= render 'static_pages/sidebar' %>

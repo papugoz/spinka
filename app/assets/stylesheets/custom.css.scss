@@ -160,3 +160,27 @@ textarea {
 		border-color: #999 !important;
 	}
 }
+
+// News#index
+
+.news-panel {
+	.news-title {
+		a {
+			font-size: 100%;
+			font-weight: bold;
+			color: #777;
+		}
+	}
+	.panel-body {
+		a {
+			color: #333;
+		}
+	}
+	.panel-footer {
+		height: 30px;
+		padding: 4px 15px;
+		a {
+			color: #333
+		}
+	}
+}

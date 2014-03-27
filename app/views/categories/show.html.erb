@@ -1,9 +1,11 @@
-<%= provide(:title, @category.title) %>
+<% provide(:title, @category.title) %>
 
-<h4><%= @category.title %></h4>
-<hr>
+<h3><%= @category.title %></h3>
+<br>
 <% if current_user %>
 <%= link_to "<span class='glyphicon glyphicon-file'></span> nowy temat".html_safe, new_category_topic_path(category_id: @category.id), class: "btn btn-primary btn-xs" %>
+<br>
+<br>
 <% end %>
 <% if @topics.any? %>
 <table class="table table-hover">

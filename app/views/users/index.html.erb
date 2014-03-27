@@ -20,7 +20,10 @@
 				<%= render 'users/order_link', ordering: 'last_name', label: 'Nazwisko' %>
 			</th>
 			<th>Funkcje</th>
-			<th></th>
+			<% if current_user && current_user.admin? %>
+			<th class="col-md-1"></th>
+			<th class="col-md-1"></th>
+			<% end %>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,9 +34,14 @@
 			<td><%= user.first_name %></td>
 			<td><%= user.last_name %></td>
 			<td><%= 'Administrator' if user.admin == true %> <%= 'Moderator' if user.moderator == true %> <%= 'Redaktor' if user.editor == true %></td>
-			<% if current_user.admin? && !current_user?(user) %>
+			<% if current_user && current_user.admin? %>
 			<td>
-				<%= link_to "usuń", user, method: :delete, data: { confirm: "Na pewno?" } %>
+				<%= link_to "<span class='glyphicon glyphicon-pencil'></span> edytuj".html_safe, edit_user_path(user), class: "btn btn-default btn-sm" %>
+			</td>
+			<td>
+				<% if !current_user?(user) %>
+				<%= render 'shared/delete_link', object: user %>
+				<% end %>
 			</td>
 			<% end %>
 		</tr>

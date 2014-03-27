@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
 	before_action :signed_in_user, only: [:create, :edit, :update, :destroy]
+	before_action only: [:edit, :update] do
+		owner_or_moderator(Post.find_by_id(params[:id]))
+	end
 	before_action :admin_user, only: [:destroy]
 
 	def create

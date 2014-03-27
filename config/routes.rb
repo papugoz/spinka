@@ -17,13 +17,15 @@ Spinka::Application.routes.draw do
 
   shallow do
     scope shallow_path: 'forum' do
-      resources :categories, path: 'kategorie', path_names: { new: 'nowa', edit: 'edycja' } do
+      resources :categories, path: 'kategorie', only: [ :new, :create, :edit, :update, :show, :destroy ], path_names: { new: 'nowa', edit: 'edycja' } do
         resources :topics, path: 'tematy', only: [ :new, :create, :edit, :update, :show, :destroy ], path_names: { new: 'nowy', edit: 'edycja' } do
-          resources :posts, path: 'odpowiedzi', path_names: { edit: 'edycja' }
+          resources :posts, path: 'odpowiedzi', only: [:create, :edit, :update, :destroy], path_names: { edit: 'edycja' }
         end
       end
     end
   end
+
+  get 'forum/kategorie' => 'categories#index'
 
   get       '/onas'                   => 'static_pages#onas'
   get       '/pomoc'                  => 'static_pages#pomoc'

@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 	before_action :signed_in_user, only: [:new, :create, :edit, :update, :destroy]
 	before_action :admin_user, only: [:destroy]
 	before_action only: [:edit, :update] do
-		owner_or_admin(Topic.find_by_id(params[:id]))
+		owner_or_moderator(Topic.find_by_id(params[:id]))
 	end
 
 	def new

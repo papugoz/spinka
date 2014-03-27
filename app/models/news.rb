@@ -9,4 +9,13 @@ class News < ActiveRecord::Base
 	def to_param
 		"#{id}-#{title.parameterize}"
 	end
+
+	def short_title(len)
+		if title.length > len
+			"#{title.first(len)}&#8230;"
+		else
+			title
+		end
+	end
+
 end
