@@ -1,5 +1,6 @@
 <%= form_for(current_user.forum_layouts.find_by_category_id(cat), remote: true) do |f| %>
-	<%= f.button(type: "submit", id: "uncollapse-#{cat}", class: "btn btn-default btn-xs") do %>
-		<span class="glyphicon glyphicon-chevron-down"></span>
+	<%= f.hidden_field :change_type, value: "collapse" %>
+	<%= f.button(type: "submit", id: "uncollapse-#{cat}", class: "collapse-button") do %>
+		<span class="glyphicon glyphicon-chevron-down small"></span> Rozwiń
 	<% end %>
 <% end %>

@@ -1,6 +1,6 @@
 <% provide(:title, @category.title) %>
 
-<h3><%= @category.title %></h3>
+<h3><%= @category.title %> <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Edycja".html_safe, edit_category_path(@category), class: "btn btn-default btn-xs" if current_user && current_user.admin? %></h3>
 <br>
 <% if current_user %>
 <%= link_to "<span class='glyphicon glyphicon-file'></span> nowy temat".html_safe, new_category_topic_path(category_id: @category.id), class: "btn btn-primary btn-xs" %>

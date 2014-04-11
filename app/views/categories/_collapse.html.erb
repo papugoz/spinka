@@ -1,14 +1,16 @@
-<% if current_user.forum_layouts.find_by_category_id(cat) %>
-	<%= form_for(current_user.forum_layouts.find_by_category_id(cat), remote: true) do |f| %>
-		<%= f.button(type: "submit", id: "collapse-#{cat}", class: "btn btn-default btn-xs") do %>
-			<span class="glyphicon glyphicon-chevron-down"></span>
+<% if current_user.forum_layouts.find_by(category_id: cat) %>
+	<%= form_for(current_user.forum_layouts.find_by(category_id: cat), remote: true) do |f| %>
+		<%= f.hidden_field :change_type, value: "collapse" %>
+		<%= f.button(type: "submit", id: "collapse-#{cat}", class: "collapse-button") do %>
+			<span class="glyphicon glyphicon-chevron-up small"></span> Zwiń
 		<% end %>
 	<% end %>
 <% else %>
 	<%= form_for(current_user.forum_layouts.build(category_id: cat), remote: true) do |f| %>
-		<%= f.hidden_field :category_id %>
-		<%= f.button(type: "submit", id: "collapse-#{cat}", class: "btn btn-default btn-xs") do %>
-			<span class="glyphicon glyphicon-chevron-down"></span>
+		<%= f.hidden_field :category_id, value: cat %>
+		<%= f.hidden_field :change_type, value: "collapse" %>
+		<%= f.button(type: "submit", id: "collapse-#{cat}", class: "collapse-button") do %>
+			<span class="glyphicon glyphicon-chevron-up small"></span> Zwiń
 		<% end %>
 	<% end %>
 <% end %>

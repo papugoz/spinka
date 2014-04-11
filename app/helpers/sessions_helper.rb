@@ -68,6 +68,14 @@ module SessionsHelper
 		current_user && current_user.admin?
 	end
 
+	def editor
+		current_user && ( current_user.editor? || current_user.admin? )
+	end
+
+	def moderator
+		current_user && ( current_user.moderator? || current_user.admin? )
+	end
+
 	def owner(object)
 		current_user && current_user.id == object
 	end

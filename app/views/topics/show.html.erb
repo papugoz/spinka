@@ -1,6 +1,7 @@
 <%= provide(:title, @topic.title) %>
 
 <section class="col-md-9">
+	<% if params[:page].blank? || params[:page].to_i == 1 %>
 	<div class="panel-default entry">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -10,8 +11,9 @@
 		<div class="body">
 			<%= simple_format @topic.content %>
 		</div>
-		<%= render 'bottom_buttons' %>
+		<%= render 'bottom_buttons' if current_user %>
 	</div>
+	<% end %>
 	<section id="topic-posts">
 
 		<% if @posts.any? %>
@@ -29,6 +31,7 @@
 		<% if current_user %>
 		<%= render 'posts/post_form' %>
 		<% else %>
+		<br>
 		<h4 class="text-muted">Aby dodać odpowiedź musisz być zalogowany</h4>
 		<% end %>
 	</section>

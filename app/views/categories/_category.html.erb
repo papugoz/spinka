@@ -1,0 +1,55 @@
+<div class="panel panel-default table-responsive">
+	<%= render 'categories/category_header', category: category %>
+	<div id="<%= category.title.split(" ").join("-") %>" class="collapse <%= 'in' unless category.forum_layouts.find_by(user_id: current_user).try(:collapsed) == true %>">
+		<% if category.topics.any? %>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="col-md-6"><small>Temat</small></th>
+					<th class="col-md-2 centered"><small>Data założenia</small></th>
+					<th class="col-md-2 centered"><small>Ilość odpowiedzi</small></th>
+					<th class="col-md-2 centered"><small>Ostatnia odpowiedź</small></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% category.topics.first(10).each do |topic| %>
+				<tr>
+					<td>
+						<% if current_user && topic.readed?(current_user) %>
+						<%= render 'topics/first_new_post_link', object: topic %>
+						<% end %>
+						<%= link_to render('topics/title', object: topic.title) , topic %>
+					</td>
+					<td class="centered">
+						<small>
+							<%= l(topic.created_at, format: :short) %>
+						</small>
+					</td>
+					<td class="centered">
+						<small>
+							<%= topic.post_count%>
+							<% if current_user && topic.readed?(current_user) %>
+							<%= " (+#{topic.new_posts(current_user)})" %>
+							<% end %>
+						</small>
+					</td>
+					<td class="centered">
+						<small>
+							<% if topic.last_post.blank? %>
+							-
+							<% else %>
+							<%= "#{time_ago_in_words(topic.last_post)} temu" %>
+							<% end %>
+						</small>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% else %>
+		<div class="panel-body">
+			<h5 class="text-muted">Nie ma tu niczego</h5>
+		</div>
+		<% end %>
+	</div>
+</div>

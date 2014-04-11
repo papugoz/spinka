@@ -1,0 +1,20 @@
+<div class="panel-heading">
+	<b><%= link_to category.title, category %></b>
+	<% if current_user %>
+	<div class="dropdown pull-right">
+		<a href="#" class="dropdown-toggle btn btn-xs btn-default" data-toggle="dropdown">
+			<span class="glyphicon glyphicon-chevron-down"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<li><a id="collapse_form-<%= category.id %>">
+				<%= render 'categories/collapse_form', object: category.id %>
+				</a>
+			</li>
+			<li><a href="#">Liczba postów</a></li>
+			<li><a>
+				<%= render 'categories/user_slider', cat: category.id %>
+			</a></li>
+		</ul>
+	</div>
+	<% end %>
+</div>

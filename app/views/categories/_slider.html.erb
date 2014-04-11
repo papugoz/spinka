@@ -1,0 +1,22 @@
+<div>
+<% unless cat == Category.order(:custom_index).first %>
+	<%= form_for(cat) do |f| %>
+		<%= f.hidden_field :id, value: cat.id %>
+		<%= f.hidden_field :dir, value: 'up' %>
+		<%= f.hidden_field :change_type, value: 'position' %>
+		<%= f.button(type: "submit", class: "btn btn-xs btn-default slider-btn") do %>
+			<span class="glyphicon glyphicon-chevron-up slider"></span>
+		<% end %>
+	<% end %>
+<% end %>
+<% unless cat == Category.order(:custom_index).last %>
+	<%= form_for(cat) do |f| %>
+		<%= f.hidden_field :id, value: cat.id %>
+		<%= f.hidden_field :dir, value: 'down' %>
+		<%= f.hidden_field :change_type, value: 'position' %>
+		<%= f.button(type: "submit", class: "btn btn-xs btn-default slider-btn") do %>
+			<span class="glyphicon glyphicon-chevron-down slider"></span>
+		<% end %>
+	<% end %>
+<% end %>
+</div>

@@ -1,0 +1,58 @@
+<div class="center-block">
+<ul class="list-inline">
+<li>
+<% if current_user.forum_layouts.find_by(category_id: cat) %>
+	<% unless current_user.forum_layouts.find_by(category_id: cat) == current_user.forum_layouts.order("user_custom_index ASC").first %>
+		<%= form_for(current_user.forum_layouts.find_by(category_id: cat)) do |f| %>
+			<%= f.hidden_field :dir, value: 'up' %>
+			<%= f.hidden_field :category_id, value: cat %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :change_type, value: 'position' %>
+			<%= f.button(type: "submit", class: "btn btn-xs btn-default slider-btn") do %>
+				W górę <span class="glyphicon glyphicon-chevron-up slider"></span>
+			<% end %>
+		<% end %>
+	<% end %>
+<% else %>
+	<% unless Category.find_by(id: cat) == Category.all.order("custom_index ASC").first %>
+		<%= form_for(current_user.forum_layouts.build(category_id: cat)) do |f| %>
+			<%= f.hidden_field :dir, value: 'up' %>
+			<%= f.hidden_field :category_id, value: cat %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :change_type, value: 'position' %>
+			<%= f.button(type: "submit", class: "btn btn-xs btn-default slider-btn") do %>
+				W górę <span class="glyphicon glyphicon-chevron-up slider"></span>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+</li>
+<li>
+<% if current_user.forum_layouts.find_by(category_id: cat) %>
+	<% unless current_user.forum_layouts.find_by(category_id: cat) == current_user.forum_layouts.order("user_custom_index ASC").last %>
+		<%= form_for(current_user.forum_layouts.find_by(category_id: cat)) do |f| %>
+			<%= f.hidden_field :dir, value: 'down' %>
+			<%= f.hidden_field :category_id, value: cat %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :change_type, value: 'position' %>
+			<%= f.button(type: "submit", class: "btn btn-xs btn-default slider-btn") do %>
+				<span class="glyphicon glyphicon-chevron-down slider"></span> W dół
+			<% end %>
+		<% end %>
+	<% end %>
+<% else %>
+	<% unless Category.find_by(id: cat) == Category.all.order("custom_index ASC").last %>
+		<%= form_for(current_user.forum_layouts.build(category_id: cat)) do |f| %>
+			<%= f.hidden_field :dir, value: 'down' %>
+			<%= f.hidden_field :category_id, value: cat %>
+			<%= f.hidden_field :user_id, value: current_user.id %>
+			<%= f.hidden_field :change_type, value: 'position' %>
+			<%= f.button(type: "submit", class: "btn btn-xs btn-default slider-btn") do %>
+				<span class="glyphicon glyphicon-chevron-down slider"></span> W dół
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+</li>
+</ul>
+</div>

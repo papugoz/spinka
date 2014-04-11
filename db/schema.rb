@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325115104) do
+ActiveRecord::Schema.define(version: 20140409140857) do
 
   create_table "categories", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "custom_index"
+    t.integer  "visible_posts", default: 10
   end
 
   create_table "comments", force: true do |t|
@@ -33,9 +35,11 @@ ActiveRecord::Schema.define(version: 20140325115104) do
   create_table "forum_layouts", force: true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
-    t.boolean  "collapsed",   default: false
+    t.boolean  "collapsed",         default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_custom_index"
+    t.integer  "visible_posts",     default: 10
   end
 
   add_index "forum_layouts", ["category_id"], name: "index_forum_layouts_on_category_id"

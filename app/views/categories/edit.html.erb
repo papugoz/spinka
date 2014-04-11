@@ -1,0 +1,16 @@
+<% provide(:title, "#{@category.title} - Edycja") %>
+
+<%= render 'shared/error_messages', object: @category %>
+<h3><%= @category.title %></h3>
+
+<%= form_for @category, html: { class: "form col-md-5" } do |f| %>
+
+<div class="form-group">
+	<%= f.label :title, "Tytuł" %>
+	<%= f.text_field :title, class: "form-control" %>
+	<%= f.hidden_field :change_type, value: 'title' %>
+	<br>
+	<%= f.submit "Aktualizuj", class: "btn btn-primary" %>
+</div>
+
+<% end %>

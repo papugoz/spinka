@@ -18,7 +18,11 @@ class StaticPagesController < ApplicationController
 	end
 
 	def forum
-		@categories = Category.all
+		if current_user && current_user.forum_layouts.any?
+			@categories = Category.joins(:forum_layouts).where("user_id = ?", current_user.id).order("forum_layouts.user_custom_index ASC")
+		else
+			@categories = Category.all.order(:custom_index)
+		end
 	end
 
 end
